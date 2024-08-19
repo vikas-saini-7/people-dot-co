@@ -1,19 +1,23 @@
+import React from "react";
 import PeopleDetailsCard from "@/components/people/PeopleDetailsCard";
 import PeopleHeader from "@/components/people/PeopleHeader";
 import PeopleTable from "@/components/people/PeopleTable";
-import { IconArrowNarrowLeft } from "@tabler/icons-react";
-import React from "react";
 
 const data = [
   {
-    name: "John Doe",
     username: "johndoe",
+    name: "John Doe",
+    role: "Product Designer",
     profile:
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
     status: "Active",
-    role: "Product Designer",
-    teams: ["Design", "Product", "Marketing"],
     email: "john@gmail.com",
+    date_of_birth: "1990-01-01",
+    gender: "Male",
+    Nationality: "Indian",
+    phone: "1234567890",
+    work_email: "john@gmail.com",
+    teams: ["Design", "Product", "Marketing"],
   },
   {
     name: "John Doe",
@@ -63,7 +67,7 @@ const page: React.FC = () => {
       <PeopleHeader />
       <PeopleTable data={data} />
       <PeopleDetailsCard
-        className="hidden bg-white absolute top-0 right-0 w-[68%] h-full shadow-lg rounded-lg"
+        className=" bg-white absolute top-0 right-0 w-[68%] h-full shadow-lg rounded-lg"
         data={data[0]}
       />
     </main>
