@@ -10,17 +10,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
-  IconArrowBack,
-  IconArrowNarrowLeft,
-  IconDots,
-  IconEdit,
-  IconPencil,
-  IconPoint,
   IconPointFilled,
   IconTrash,
 } from "@tabler/icons-react";
 import { Button } from "../ui/button";
-// import { PeopleEditDialog } from "@/components/people/PeopleEditDialog";
+import PeopleEditDialog from "./PeopleEditDialog";
 
 export interface IPeople {
   data: {
@@ -87,7 +81,7 @@ const PeopleTable: React.FC<IPeople> = ({ data }) => {
               {/* <button className="">
                 <IconPencil />
               </button> */}
-              {/* <PeopleEditDialog data={data} /> */}
+              <PeopleEditDialog data={data} />
             </TableCell>
           </TableRow>
         ))}

@@ -40,8 +40,12 @@ const PeopleEditDialog: React.FC<PeopleEditDialogProps> = ({ data }) => {
           <DialogTitle className="text-xl">Edit Profile</DialogTitle>
         </DialogHeader>
         <div>
-          <div className="text-center">
-            <img src={data.profile} alt="profile" />
+          <div className="flex flex-col items-center gap-6">
+            <img
+              className="w-20 rounded-full"
+              src={data.profile}
+              alt="profile"
+            />
             <div className="space-x-2">
               <Button
                 size={"sm"}
