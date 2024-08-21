@@ -44,3 +44,16 @@ exports.editPeople = async (req, res) => {
     res.status(500).json({ status: "error", message: "Server error" });
   }
 };
+
+exports.deletePeople = async (req, res) => {
+  try {
+    await People.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      status: "success",
+      results: null,
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ status: "error", message: "Server error" });
+  }
+};

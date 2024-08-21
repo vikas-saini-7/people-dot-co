@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { IPeople } from "./PeopleTable";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
