@@ -23,6 +23,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { IconPencil, IconPlus, IconReload } from "@tabler/icons-react";
+import { createPeople } from "@/store/actions/peopleActions";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
 
 // interface IPeople {
 //   name: string;
@@ -35,6 +38,8 @@ import { IconPencil, IconPlus, IconReload } from "@tabler/icons-react";
 // }
 
 const CreatePeople: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [name, setName] = React.useState<string>("");
   const [username, setUsername] = React.useState<string>("");
   const [profile, setProfile] = React.useState<string>("");
@@ -44,7 +49,42 @@ const CreatePeople: React.FC = () => {
   const [teams, setTeams] = React.useState<string[]>([]);
   const [phone, setPhone] = React.useState<string>("");
   const [workEmail, setWorkEmail] = React.useState<string>("");
+  const [gender, setGender] = React.useState<string>("");
+  const [date_of_birth, setDateOfBirth] = React.useState<string>("");
   const [nationality, setNationality] = React.useState<string>("");
+
+  // createPeople
+  const handleAddMember = () => {
+    console.log("Add Member");
+    console.log(name, username, profile, status, role, email, teams);
+    setWorkEmail(email);
+    dispatch(
+      createPeople({
+        name,
+        username,
+        profile,
+        status,
+        role,
+        email,
+        teams,
+        date_of_birth,
+        gender,
+        nationality,
+        phone,
+        work_email: email,
+      })
+    );
+    setName("");
+    setUsername("");
+    setProfile("");
+    setStatus("");
+    setRole("");
+    setEmail("");
+    setTeams([]);
+    setPhone("");
+    setWorkEmail("");
+    setNationality("");
+  };
 
   return (
     <Dialog>
@@ -67,11 +107,25 @@ const CreatePeople: React.FC = () => {
             <div className="flex space-x-6">
               <div className="w-1/2">
                 <Label>Name</Label>
-                <Input defaultValue={name} type="text" placeholder="Name" />
+                <Input
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  value={name}
+                  type="text"
+                  placeholder="Name"
+                />
               </div>
               <div className="w-1/2">
                 <Label>Email</Label>
-                <Input defaultValue={email} type="text" placeholder="Email" />
+                <Input
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  value={email}
+                  type="text"
+                  placeholder="Email"
+                />
               </div>
             </div>
 
@@ -79,7 +133,10 @@ const CreatePeople: React.FC = () => {
               <div className="w-1/2">
                 <Label>Username</Label>
                 <Input
-                  defaultValue={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                  value={username}
                   type="text"
                   placeholder="Username"
                 />
@@ -87,7 +144,10 @@ const CreatePeople: React.FC = () => {
               <div className="w-1/2">
                 <Label>Profile</Label>
                 <Input
-                  defaultValue={profile}
+                  onChange={(e) => {
+                    setProfile(e.target.value);
+                  }}
+                  value={profile}
                   type="text"
                   placeholder="Enter image URL"
                 />
@@ -96,13 +156,57 @@ const CreatePeople: React.FC = () => {
 
             <div className="flex space-x-6">
               <div className="w-1/2">
+                <Label>Gender</Label>
+                <Select
+                  onValueChange={(value) => {
+                    setGender(value);
+                  }}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select a Gender" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Gender</SelectLabel>
+                      <SelectItem value="Male">Male</SelectItem>
+                      <SelectItem value="Female">Female</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="w-1/2">
+                <Label>Date of Birth</Label>
+                <Input
+                  onChange={(e) => {
+                    setDateOfBirth(e.target.value);
+                  }}
+                  value={date_of_birth}
+                  type="text"
+                  placeholder="Enter DOB"
+                />
+              </div>
+            </div>
+
+            <div className="flex space-x-6">
+              <div className="w-1/2">
                 <Label>Phone</Label>
-                <Input defaultValue={phone} type="text" placeholder="Phone" />
+                <Input
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                  }}
+                  value={phone}
+                  type="text"
+                  placeholder="Phone"
+                />
               </div>
               <div className="w-1/2">
                 <Label>Nationality</Label>
                 <Input
-                  defaultValue={nationality}
+                  onChange={(e) => {
+                    setNationality(e.target.value);
+                  }}
+                  value={nationality}
                   type="text"
                   placeholder="Nationality"
                 />
@@ -112,31 +216,39 @@ const CreatePeople: React.FC = () => {
             <div className="flex space-x-6">
               <div className="w-1/2">
                 <Label>Role</Label>
-                <Select>
+                <Select
+                  onValueChange={(value) => {
+                    setRole(value);
+                  }}
+                >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a fruit" />
+                    <SelectValue placeholder="Select a role" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Roles</SelectLabel>
-                      <SelectItem value="apple">Designer</SelectItem>
-                      <SelectItem value="banana">Developer</SelectItem>
-                      <SelectItem value="blueberry">Manager</SelectItem>
+                      <SelectItem value="Designer">Designer</SelectItem>
+                      <SelectItem value="Developer">Developer</SelectItem>
+                      <SelectItem value="Manager">Manager</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
               </div>
               <div className="w-1/2">
                 <Label>Status</Label>
-                <Select>
+                <Select
+                  onValueChange={(value) => {
+                    setStatus(value);
+                  }}
+                >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select one" />
+                    <SelectValue placeholder="Select status" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Status</SelectLabel>
-                      <SelectItem value="apple">Active</SelectItem>
-                      <SelectItem value="banana">InAvtive</SelectItem>
+                      <SelectItem value="Active">Active</SelectItem>
+                      <SelectItem value="Inactive">Inactive</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -145,21 +257,27 @@ const CreatePeople: React.FC = () => {
 
             <div className="w-full">
               <Label>Teams</Label>
-              <Input type="text" placeholder="" />
+              <Input
+                onChange={(e) => {
+                  setTeams(e.target.value.split(","));
+                }}
+                value={teams?.join(",")}
+                type="text"
+                placeholder="Teams (comma separated)"
+              />
             </div>
           </div>
         </div>
         <DialogFooter>
-          <Button className="uppercase" type="submit" variant={"outline"}>
+          <Button className="uppercase" type="button" variant={"outline"}>
             Cancel
           </Button>
           <Button
-            className="uppercase"
-            type="submit"
-            variant={"outline"}
-            disabled
+            onClick={handleAddMember}
+            size={"sm"}
+            className="bg-[#6941C6] h-9 hover:bg-[#6941C6]/80 uppercase gap-1 flex items-center"
           >
-            Save
+            <p>Add Member</p>
           </Button>
         </DialogFooter>
       </DialogContent>

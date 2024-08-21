@@ -43,7 +43,7 @@ const PeopleEditDialog: React.FC<PeopleEditDialogProps> = ({ data }) => {
           <div className="flex flex-col items-center gap-6">
             <img
               className="w-20 rounded-full"
-              src={data.profile}
+              src={data?.profile}
               alt="profile"
             />
             <div className="space-x-2">
@@ -70,7 +70,7 @@ const PeopleEditDialog: React.FC<PeopleEditDialogProps> = ({ data }) => {
               <div className="w-1/2">
                 <Label>Name</Label>
                 <Input
-                  defaultValue={data.name}
+                  defaultValue={data?.name}
                   type="text"
                   placeholder="Name"
                 />
@@ -78,7 +78,7 @@ const PeopleEditDialog: React.FC<PeopleEditDialogProps> = ({ data }) => {
               <div className="w-1/2">
                 <Label>Email</Label>
                 <Input
-                  defaultValue={data.email}
+                  defaultValue={data?.email}
                   type="text"
                   placeholder="Email"
                 />
@@ -89,7 +89,7 @@ const PeopleEditDialog: React.FC<PeopleEditDialogProps> = ({ data }) => {
               <div className="w-1/2">
                 <Label>Role</Label>
                 <Input
-                  defaultValue={data.role}
+                  defaultValue={data?.role}
                   type="text"
                   placeholder="Role"
                 />
@@ -97,7 +97,7 @@ const PeopleEditDialog: React.FC<PeopleEditDialogProps> = ({ data }) => {
               <div className="w-1/2">
                 <Label>Status</Label>
                 <Input
-                  defaultValue={data.status}
+                  defaultValue={data?.status}
                   type="text"
                   placeholder="Status"
                 />

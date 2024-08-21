@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { deletePeople, fetchPeople } from "@/store/actions/peopleActions";
+import { createPeople, deletePeople, fetchPeople } from "@/store/actions/peopleActions";
 import { toast } from "react-hot-toast";
 
 export interface IPeople {
@@ -56,13 +56,31 @@ const peopleSlice = createSlice({
         }
       )
       .addCase(fetchPeople.rejected, (state, action) => {
+        toast.error("Error loading data: Mongoose Error")
         state.status = "failed";
         state.error = action.error.message || "Failed to fetch people";
       })
 
+      // adding person 
+      .addCase(createPeople.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(
+        createPeople.fulfilled,
+        (state, action: PayloadAction<IPeople>) => {
+          console.log("created Person:", action.payload)
+          toast.success("People created successfully");
+          state.list.push(action.payload);
+        }
+      )
+      .addCase(createPeople.rejected, (state, action) => {
+        toast.error(action.error.message || "Failed to delete people");
+      })
+
+      // deleting person 
       .addCase(deletePeople.fulfilled, (state, action: PayloadAction<string>) => {
-        state.list = state.list.filter((people) => people._id !== action.payload);
         toast.success("People deleted successfully");
+        state.list = state.list.filter((people) => people._id !== action.payload);
       })
       .addCase(deletePeople.rejected, (state, action) => {
         toast.error(action.error.message || "Failed to delete people");

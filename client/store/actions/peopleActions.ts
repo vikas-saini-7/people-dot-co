@@ -48,3 +48,15 @@ export const deletePeople = createAsyncThunk<string, string, { rejectValue: Reje
     }
   }
 );
+
+export const createPeople = createAsyncThunk<IPeople, IPeople, { rejectValue: RejectValue }>(
+  "people/createPeople",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axios.post("http://localhost:8000/api/people", data);
+      return res.data.results.person;
+    } catch (err: any) {
+      return rejectWithValue({ message: err.message });
+    }
+  }
+);

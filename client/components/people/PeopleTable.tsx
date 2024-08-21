@@ -71,14 +71,16 @@ const PeopleTable: React.FC<IPeople> = ({
               <div className="flex items-center gap-2 pr-12">
                 <div className="w-8 h-8">
                   <img
-                    src={data.profile}
+                    src={data?.profile}
                     alt="profile"
                     className="w-8 h-8 rounded-full"
                   />
                 </div>
                 <div>
-                  <p className="font-semibold whitespace-nowrap">{data.name}</p>
-                  <p className="text-gray-500 text-sm">@{data.username}</p>
+                  <p className="font-semibold whitespace-nowrap">
+                    {data?.name}
+                  </p>
+                  <p className="text-gray-500 text-sm">@{data?.username}</p>
                 </div>
               </div>
             </TableCell>
@@ -87,19 +89,19 @@ const PeopleTable: React.FC<IPeople> = ({
                 <span className="text-[#17B26A]">
                   <IconPointFilled size={16} />
                 </span>
-                {data.status}
+                {data?.status}
               </p>
             </TableCell>
-            <TableCell>{data.role}</TableCell>
-            <TableCell>{data.email}</TableCell>
-            <TableCell>{data.teams.join(", ")}</TableCell>
+            <TableCell>{data?.role}</TableCell>
+            <TableCell>{data?.email}</TableCell>
+            <TableCell>{data?.teams?.join(", ")}</TableCell>
             <TableCell
               className="whitespace-nowrap"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 className="inline lg:mr-6 mr-4"
-                onClick={() => handleDelete(data._id!)}
+                onClick={() => handleDelete(data?._id!)}
               >
                 <IconTrash />
               </button>
